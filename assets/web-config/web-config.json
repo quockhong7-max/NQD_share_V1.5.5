@@ -1,0 +1,43 @@
+{
+  "prObjects": [
+    {
+      "ten": "Phạm Văn Tám",
+      "idZalo": "-1",
+      "noiDung": "Autosend Tổng",
+      "hinhAnh": [
+        "dqtbot.jpg"
+      ],
+      "video": [],
+      "link": {},
+      "thoiGianGui": [
+        "03:00",
+        "05:00",
+        "08:00",
+        "10:00",
+        "13:00",
+        "14:40",
+        "16:00",
+        "19:00",
+        "22:00"
+      ],
+      "customContent": {
+        "6206209960966272896": {
+          "noiDung": "Key vàng Không phải admin game mọi vấn đề liên quan đến game vui lòng ib key bạc Ngojc",
+          "hinhAnh": [],
+          "video": []
+        },
+        "4373007278127828240": {
+          "noiDung": "",
+          "hinhAnh": [],
+          "video": []
+        }
+      }
+    }
+  ],
+  "selectedGroups": {
+    "9054378109053611543": {
+      "name": "Lý Đức, N Q D, Okashi🪐🩹"
+    }
+  },
+  "selectedFriends": {}
+}

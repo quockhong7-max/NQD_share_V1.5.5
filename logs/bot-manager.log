@@ -1,0 +1,68 @@
+2025-08-10 15:17:13 - Mã Lỗi: undefined - > Chú Thích Lỗi Tin Nhắn: badWords is not defined
+Nội Dung Lỗi: ReferenceError: badWords is not defined
+    at handleBadWordModification (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/service-dqt/anti-service/anti-badword.js:73:16)
+    at handleAntiBadWordCommand (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/service-dqt/anti-service/anti-badword.js:203:11)
+    at handleCommand (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/commands/command.js:714:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async messagesUser (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/automations/event-send-msg.js:187:35)
+    at async Listener.<anonymous> (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/index.js:165:5)
+2025-08-10 15:53:59 - Mã Lỗi: undefined - > Chú Thích Lỗi Tin Nhắn: Share_By_N_Q_D is not defined
+Nội Dung Lỗi: ReferenceError: Share_By_N_Q_D is not defined
+    at getBotDetails (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/service-dqt/info-service/bot-info.js:46:12)
+    at async handleCommand (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/commands/command.js:822:17)
+    at async messagesUser (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/automations/event-send-msg.js:188:35)
+    at async Listener.<anonymous> (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/index.js:165:5)
+2025-08-10 16:00:15 - Mã Lỗi: undefined - > Chú Thích Lỗi Tin Nhắn: NQD is not defined
+Nội Dung Lỗi: ReferenceError: NQD is not defined
+    at getBotDetails (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/service-dqt/info-service/bot-info.js:46:14)
+    at async handleCommand (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/commands/command.js:822:17)
+    at async messagesUser (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/automations/event-send-msg.js:188:35)
+    at async Listener.<anonymous> (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/index.js:165:5)
+2025-08-10 16:15:33 - Mã Lỗi: undefined - > Chú Thích Lỗi Tin Nhắn: Cannot read properties of undefined (reading 'some')
+Nội Dung Lỗi: TypeError: Cannot read properties of undefined (reading 'some')
+    at handleBlockBot (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/commands/bot-manager/group-manage.js:298:44)
+    at handleCommand (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/commands/command.js:757:15)
+    at async messagesUser (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/automations/event-send-msg.js:188:35)
+    at async Listener.<anonymous> (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/index.js:165:5)
+2025-08-10 16:17:25 - Mã Lỗi: undefined - > Chú Thích Lỗi Tin Nhắn: Cannot read properties of undefined (reading 'some')
+Nội Dung Lỗi: TypeError: Cannot read properties of undefined (reading 'some')
+    at handleBlockBot (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/commands/bot-manager/group-manage.js:298:44)
+    at handleCommand (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/commands/command.js:757:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async messagesUser (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/automations/event-send-msg.js:188:35)
+    at async Listener.<anonymous> (file:///C:/Users/Administrator/Downloads/NQD_share_V1.5.5/src/index.js:165:5)
+2025-08-11 13:28:53 - Bot started
+2025-08-11 13:29:21 - Bot đã thoát với mã: 3221225786
+2025-08-11 13:29:21 - Failed to stop bot: kill ESRCH
+2025-08-11 13:29:22 - Bot started
+2025-08-11 13:29:22 - Bot restarted
+2025-08-11 13:33:43 - Bot started
+2025-08-11 13:35:06 - Bot đã thoát với mã: 3221225786
+2025-08-11 13:35:06 - Failed to stop bot: kill ESRCH
+2025-08-11 13:35:07 - Bot started
+2025-08-11 13:35:07 - Bot restarted
+2025-08-11 13:36:16 - Bot đã thoát với mã: 3221225786
+2025-08-11 13:36:16 - Failed to stop bot: kill ESRCH
+2025-08-11 13:36:17 - Bot started
+2025-08-11 13:36:17 - Bot restarted
+2025-08-11 13:36:51 - Bot đã thoát với mã: 3221225786
+2025-08-11 13:36:51 - Failed to stop bot: kill ESRCH
+2025-08-11 13:36:52 - Bot started
+2025-08-11 13:36:52 - Bot restarted
+2025-08-11 13:39:50 - Bot đã thoát với mã: 3221225786
+2025-08-11 13:39:50 - Failed to stop bot: kill ESRCH
+2025-08-11 13:39:51 - Bot started
+2025-08-11 13:39:51 - Bot restarted
+2025-08-11 13:54:29 - Bot started
+2025-08-11 13:54:40 - Bot đã thoát với mã: 1
+2025-08-11 13:54:40 - Failed to stop bot: kill ESRCH
+2025-08-11 13:54:41 - Bot started
+2025-08-11 13:54:41 - Bot restarted
+2025-08-11 13:54:51 - Bot đã thoát với mã: 1
+2025-08-11 13:54:51 - Failed to stop bot: kill ESRCH
+2025-08-11 13:54:52 - Bot started
+2025-08-11 13:54:52 - Bot restarted
+2025-08-11 13:54:56 - Bot đã thoát với mã: 3221225786
+2025-08-11 13:54:56 - Failed to stop bot: kill ESRCH
+2025-08-11 13:54:57 - Bot started
+2025-08-11 13:54:57 - Bot restarted
