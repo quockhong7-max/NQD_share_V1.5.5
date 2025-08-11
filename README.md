@@ -40,6 +40,8 @@ Mod lại bởi **NQD** – [GitHub](https://github.com/NQD136)
 
 ## 🚀 Hướng dẫn sử dụng
 
+**Yêu Cầu Bắt Buộc: Có Bản Nodejs V20**
+
 ### 1️⃣ Cấu hình
 Mở tệp `config.json` trong thư mục `assets` và thiết lập:
 
