@@ -2,13 +2,13 @@ import axios from "axios";
 import { getGlobalPrefix } from "../../service.js";
 import { getContent } from "../../../utils/format-util.js";
 import { sendMessageComplete, sendMessageFailed, sendMessageQuery, sendMessageStateQuote } from "../../chat-zalo/chat-style/chat-style.js";
-import { API_KEY_HUNGDEV } from "../api-hungdev/aio-downlink.js";
+import { API_KEY_HOANGDEV } from "../api-hungdev/aio-downlink.js";
 
 const URL_GPT = "https://api.hungdev.id.vn/ai/chatbot";
 
 export async function callGPTAPI(question) {
   try {
-    const response = await axios.post(`${URL_GPT}?apikey=${API_KEY_HUNGDEV}`, {
+    const response = await axios.post(`${URL_GPT}?apikey=${API_KEY_HOANGDEV}`, {
       content: question,
       model: "gpt-4o",
     }, {
