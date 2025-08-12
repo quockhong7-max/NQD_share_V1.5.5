@@ -2,7 +2,7 @@ import { MessageType } from "zlbotdqt";
 import axios from "axios";
 import { getGlobalPrefix } from "../../service.js";
 import { getActiveGames, checkHasActiveGame } from "./index.js";
-import { API_KEY_HUNGDEV } from "../../api-crawl/api-hungdev/aio-downlink.js";
+import { API_KEY_HOANGDEV } from "../../api-crawl/api-hungdev/aio-downlink.js";
 
 export async function handleWordChainCommand(api, message) {
   const threadId = message.threadId;
@@ -120,7 +120,7 @@ async function findNextPhrase(lastPhrase) {
   try {
     const encodedWord = encodeURIComponent(lastPhrase);
     const response = await axios.get(
-      `https://api.hungdev.id.vn/games/word-chain?apikey=${API_KEY_HUNGDEV}&word=${encodedWord}`
+      `https://api.hungdev.id.vn/games/word-chain?apikey=${API_KEY_HOANGDEV}&word=${encodedWord}`
     );
 
     if (response.data.success && response.data.data.success) {
