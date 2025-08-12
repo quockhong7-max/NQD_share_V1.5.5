@@ -17,7 +17,7 @@ import { setSelectionsMapData } from "../index.js";
 import { getCachedMedia, setCacheData } from "../../../utils/link-platform-cache.js";
 import { deleteFile, downloadAndSaveVideo, downloadFile } from "../../../utils/util.js";
 import { createSearchResultImage } from "../../../utils/canvas/search-canvas.js";
-import { API_KEY_HUNGDEV } from "../api-hungdev/aio-downlink.js";
+import { API_KEY_HOANGDEV } from "../api-hungdev/aio-downlink.js";
 import { getDataDownloadOriginal, getDataDownloadVideo, getTiktokRelated, searchTiktok } from "./tiktok-api.js";
 import { tempDir } from "../../../utils/io-json.js";
 import { sendVoiceMusic } from "../../chat-zalo/chat-special/send-voice/send-voice.js";
@@ -62,7 +62,7 @@ schedule.scheduleJob("*/5 * * * * *", () => {
 
 export async function searchVideoTiktok(query) {
   try {
-    const response = await axios.get(`${URL_TIKTOK_SEARCH_HUNGDEV}?keyword=${query}&apikey=${API_KEY_HUNGDEV}`, {
+    const response = await axios.get(`${URL_TIKTOK_SEARCH_HOANGDEV}?keyword=${query}&apikey=${API_KEY_HOANGDEV}`, {
       headers: {
         "Content-Type": "application/json",
       },
