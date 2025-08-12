@@ -1,5 +1,6 @@
 import axios from "axios";
 import path from "path";
+import fs from "fs";
 import { getGlobalPrefix } from "../../service.js";
 import { MessageMention } from "../../../api-zalo/index.js";
 import {
@@ -19,66 +20,79 @@ import { getBotId } from "../../../index.js";
 
 const { execSync, exec } = await import("child_process");
 
-export const API_KEY_HUNGDEV = "5fffa24885";
-export const API_URL_DOWNAIO_HUNGDEV = "https://api.hungdev.id.vn/medias/down-aio";
+export const API_KEY_HOANGDEV = ""; // key lấy ở https://hoangdev.io.vn
+export const API_URL_DOWNAIO_HOANGDEV = "https://hoangdev.io.vn/Aio/aio-download";
 
 const MEDIA_TYPES = {
-  "tiktok.com": "tiktok",
-  "douyin.com": "douyin",
-  "capcut.com": "capcut",
-  "threads.net": "threads",
-  "instagram.com": "instagram",
-  "facebook.com": "facebook",
-  "fb.com": "facebook",
-  "espn.com": "espn",
-  "kuaishou.com": "kuaishou",
-  "pinterest.com": "pinterest",
-  "imdb.com": "imdb",
-  "imgur.com": "imgur",
-  "ifunny.co": "ifunny",
-  "izlesene.com": "izlesene",
-  "reddit.com": "reddit",
-  "youtube.com": "youtube",
-  "youtu.be": "youtube",
-  "twitter.com": "X",
-  "x.com": "X",
-  "vimeo.com": "vimeo",
-  "snapchat.com": "snapchat",
-  "bilibili.com": "bilibili",
-  "dailymotion.com": "dailymotion",
-  "sharechat.com": "sharechat",
-  "linkedin.com": "linkedin",
+  "tiktok.": "tiktok",
+  "douyin.": "douyin",
+  "capcut.": "capcut",
+  "threads.": "threads",
+  "instagram.": "instagram",
+  "facebook.": "facebook",
+  "fb.": "facebook",
+  "espn.": "espn",
+  "pinterest.": "pinterest",
+  "imdb.": "imdb",
+  "imgur.": "imgur",
+  "ifunny.": "ifunny",
+  "izlesene.": "izlesene",
+  "reddit.": "reddit",
+  "youtube.": "youtube",
+  "youtu.": "youtube",
+  "twitter.": "twitter",
+  "x.com": "twitter",
+  "vimeo.": "vimeo",
+  "snapchat.": "snapchat",
+  "bilibili.": "bilibili",
+  "dailymotion.": "dailymotion",
+  "sharechat.": "sharechat",
+  "likee.": "likee",
+  "linkedin.": "linkedin",
   "tumblr.com": "tumblr",
   "hipi.co.in": "hipi",
   "t.me": "telegram",
+  "telegram.": "telegram",
   "getstickerpack.com": "getstickerpack",
   "bitchute.com": "bitchute",
   "febspot.com": "febspot",
   "9gag.com": "9gag",
-  "ok.ru": "ok",
+  "ok.ru": "oke",
+  "oke.ru": "oke",
+  "vk.com": "vk-vkvideo",
+  "vk.ru": "vk-vkvideo",
+  "vkvideo.": "vk-vkvideo",
   "rumble.com": "rumble",
   "streamable.com": "streamable",
   "ted.com": "ted",
   "tv.sohu.com": "sohutv",
-  "xvideos.com": "xvideos",
-  "xnxx.com": "xnxx",
-  "xiaohongshu.com": "xiaohongshu",
-  "weibo.com": "weibo",
-  "miaopai.com": "miaopai",
-  "meipai.com": "meipai",
+  "sohu.com": "sohutv",
+  "xvideos.": "xvideos",
+  "xnxx.": "xnxx",
+  "pornbox.": "pornbox",
+  "xiaohongshu.": "xiaohongshu",
+  "ixigua.": "ixigua",
+  "weibo.": "weibo",
+  "sina.com": "sina",
+  "miaopai.": "miaopai",
+  "meipai.": "meipai",
   "xiaoying.tv": "xiaoying",
   "national.video": "national",
-  "yingke.com": "yingke",
-  "soundcloud.com": "soundcloud",
-  "mixcloud.com": "mixcloud",
-  "spotify.com": "spotify",
+  "yingke.": "yingke",
+  "soundcloud.": "soundcloud",
+  "mixcloud.": "mixcloud",
+  "spotify.": "spotify",
+  "deezer.": "deezer",
   "zingmp3.vn": "zingmp3",
-  "bandcamp.com": "bandcamp",
+  "bandcamp.": "bandcamp",
+  "kuaishou.": "kuaishou",
+  "qq.": "qq",
+  "bluesky.": "bluesky",
 };
 
 const getMediaType = (url) => {
   const urlLower = url.toLowerCase();
-  return Object.entries(MEDIA_TYPES).find(([domain]) => urlLower.includes(domain))?.[1] || "Unknown";
+  return Object.entries(MEDIA_TYPES).find(([domain]) => urlLower.includes(domain))?.[1] || null;
 };
 
 const extractFacebookId = (url) => {
@@ -98,13 +112,12 @@ export const getDurationVideo = async (path) => {
 
 export const getDataDownloadVideo = async (url) => {
   try {
-    const response = await axios.get(`${API_URL_DOWNAIO_HUNGDEV}?apikey=${API_KEY_HUNGDEV}&url=${encodeURIComponent(url)}`, {
+    const response = await axios.get(`${API_URL_DOWNAIO_HOANGDEV}?apikey=${API_KEY_HOANGDEV}&url=${encodeURIComponent(url)}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-
-    if (response.data && response.data.data) {
+    if (response.data && response.data.success && response.data.data) {
       return response.data.data;
     }
     return null;
@@ -130,7 +143,7 @@ const typeText = (type) => {
 const downloadSelectionsMap = new Map();
 const TIME_WAIT_SELECTION = 30000;
 
-export async function processAndSendMedia(api, message, mediaData) {
+export async function processAndSendMedia(api, message, mediaData, isMultipleImages = false) {
   const {
     selectedMedia,
     mediaType,
@@ -150,14 +163,68 @@ export async function processAndSendMedia(api, message, mediaData) {
     const thumbnailUrl = selectedMedia.url;
 
     if (thumbnailUrl) {
-      await downloadFile(thumbnailUrl, thumbnailPath);
+      let retryCount = 0;
+      const maxRetries = 3;
+      let downloadSuccess = false;
+      
+      while (retryCount < maxRetries && !downloadSuccess) {
+        try {
+          await downloadImageWithTimeout(thumbnailUrl, thumbnailPath, 30000);
+          downloadSuccess = true;
+        } catch (downloadError) {
+          retryCount++;
+          console.error(`Lỗi tải ảnh lần ${retryCount}:`, downloadError.message);
+          if (retryCount >= maxRetries) {
+            throw downloadError;
+          }
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+    }
     }
 
     await api.sendMessage({
-      msg: `[ ${senderName} ]\n> From ${mediaType} <\n\n👤 Author: ${author}\n🖼️ Caption: ${title}`,
+      msg: `[ ${senderName} ]\n\n👤 Author: ${author}\n🖼️ Caption: ${title}`,
       attachments: [thumbnailPath],
       mentions: [MessageMention(senderId, senderName.length, 2, false)],
+      ttl: 3600000,
     }, message.threadId, message.type);
+
+    if (selectedMedia.voiceUrl) {
+      try {
+        const voicePath = path.resolve(tempDir, `voice_${Date.now()}.mp3`);
+        
+        let retryCount = 0;
+        const maxRetries = 3;
+        let downloadSuccess = false;
+        
+        while (retryCount < maxRetries && !downloadSuccess) {
+          try {
+            await downloadVoiceWithTimeout(selectedMedia.voiceUrl, voicePath, 30000);
+            downloadSuccess = true;
+          } catch (downloadError) {
+            retryCount++;
+            console.error(`Lỗi tải voice lần ${retryCount}:`, downloadError.message);
+            if (retryCount >= maxRetries) {
+              throw downloadError;
+            }
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
+        }
+        
+        if (downloadSuccess) {
+          const uploadResult = await api.uploadAttachment([voicePath], message.threadId, message.type);
+          const voiceUrl = uploadResult[0].fileUrl;
+          
+          if (voiceUrl) {
+            await api.sendVoice(message, voiceUrl, 3600000);
+          }
+        }
+        
+        await deleteFile(voicePath);
+      } catch (error) {
+        console.error("Lỗi khi tải và gửi voice:", error);
+      }
+    }
 
     if (thumbnailUrl) {
       await clearImagePath(thumbnailPath);
@@ -180,10 +247,12 @@ export async function processAndSendMedia(api, message, mediaData) {
   if (cachedMedia) {
     videoUrl = cachedMedia.fileUrl;
   } else {
-    const object = {
-      caption: `Chờ bé lấy ${typeText(typeFile)} một chút, xong bé gọi cho hay.\n\n⏳ ${title}\n📊 Chất lượng: ${quality}`,
-    };
-    await sendMessageProcessingRequest(api, message, object, 8000);
+    if (!isMultipleImages) {
+      const object = {
+        caption: `Chờ bé lấy ${typeText(typeFile)} một chút, xong bé gọi cho hay.\n\n⏳ ${title}\n📊 Chất lượng: ${quality}`,
+      };
+      await sendMessageProcessingRequest(api, message, object, 8000);
+    }
 
     videoUrl = await categoryDownload(api, message, mediaType, uniqueId, selectedMedia, quality);
     if (!videoUrl) {
@@ -196,18 +265,44 @@ export async function processAndSendMedia(api, message, mediaData) {
   }
 
   if (typeFile === "audio") {
-    const mediaTypeString = capitalizeEachWord(mediaType);
-    const object = {
-      trackId: uniqueId,
-      title: title,
-      artists: author,
-      source: mediaTypeString,
-      caption: `> From ${mediaTypeString} <\nNhạc Bạn Chọn Đây!!!\n\n🎵 Music: ${title}`,
-      imageUrl: selectedMedia.thumbnail,
-      voiceUrl: videoUrl,
-    };
-
-    await sendVoiceMusic(api, message, object, 1800000);
+    try {
+      const audioPath = path.resolve(tempDir, `audio_${Date.now()}.${selectedMedia.extension || 'mp3'}`);
+      
+      let retryCount = 0;
+      const maxRetries = 3;
+      let downloadSuccess = false;
+      
+      while (retryCount < maxRetries && !downloadSuccess) {
+        try {
+          await downloadVoiceWithTimeout(videoUrl, audioPath, 30000);
+          downloadSuccess = true;
+        } catch (downloadError) {
+          retryCount++;
+          console.error(`Lỗi tải audio lần ${retryCount}:`, downloadError.message);
+          if (retryCount >= maxRetries) {
+            throw downloadError;
+                      }
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+      
+              if (downloadSuccess) {
+          const uploadResult = await api.uploadAttachment([audioPath], message.threadId, message.type);
+          const audioUrl = uploadResult[0].fileUrl;
+          
+          if (audioUrl) {
+            await api.sendVoice(message, audioUrl, 3600000);
+          }
+        }
+        
+        await deleteFile(audioPath);
+    } catch (error) {
+      console.error("Lỗi khi xử lý audio:", error);
+      await api.sendMessage({
+        msg: `Không thể tải audio từ ${capitalizeEachWord(mediaType)}`,
+        ttl: 30000,
+      }, message.threadId, message.type);
+    }
   } else if (typeFile === "video") {
     await api.sendVideo({
       videoUrl: videoUrl,
@@ -225,6 +320,59 @@ export async function processAndSendMedia(api, message, mediaData) {
       },
       ttl: 3600000,
     });
+  }
+}
+
+export async function processAndSendMultipleImages(api, message, images, mediaData) {
+  const {
+    mediaType,
+    title,
+    author,
+    senderId,
+    senderName
+  } = mediaData;
+
+  const imagePaths = [];
+  
+  try {
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i];
+      const imagePath = path.resolve(tempDir, `${Date.now()}_${i}.${image.extension}`);
+      
+      let retryCount = 0;
+      const maxRetries = 3;
+      let downloadSuccess = false;
+      
+      while (retryCount < maxRetries && !downloadSuccess) {
+        try {
+          await downloadImageWithTimeout(image.url, imagePath, 30000);
+          downloadSuccess = true;
+        } catch (downloadError) {
+          retryCount++;
+          console.error(`Lỗi tải ảnh lần ${retryCount}:`, downloadError.message);
+          if (retryCount >= maxRetries) {
+            throw downloadError;
+          }
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+      
+      if (downloadSuccess) {
+        imagePaths.push(imagePath);
+      }
+    }
+
+    await api.sendMessage({
+      msg: `[ ${senderName} ]\n\n👤 Author: ${author}\n🖼️ Caption: ${title}`,
+      attachments: imagePaths,
+      mentions: [MessageMention(senderId, senderName.length, 2, false)],
+      ttl: 3600000,
+    }, message.threadId, message.type);
+
+  } finally {
+    for (const imagePath of imagePaths) {
+      await clearImagePath(imagePath);
+    }
   }
 }
 
@@ -246,6 +394,14 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
     }
 
     const mediaType = getMediaType(query);
+    if (!mediaType) {
+      const object = {
+        caption: `Link này em chưa hỗ trợ tải dữ liệu.`,
+      };
+      await sendMessageWarningRequest(api, message, object, 30000);
+      return;
+    }
+    
     let dataDownload = await getDataDownloadVideo(query);
     if (!dataDownload || dataDownload.error) {
       const object = {
@@ -259,7 +415,7 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
 
     switch (mediaType) {
       case "tiktok":
-        uniqueId = dataDownload.title.replace(/#\w+/g, (match) => match.toLowerCase());
+        uniqueId = (dataDownload.title || dataDownload.url || "unknown").replace(/#\w+/g, (match) => match.toLowerCase());
         dataDownload.medias.forEach((item) => {
           dataLink.push({
             url: item.url,
@@ -268,11 +424,12 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
             title: dataDownload.title,
             thumbnail: item.thumbnail || dataDownload.thumbnail,
             extension: item.extension,
+            voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
           });
         });
         break;
       case "douyin":
-        uniqueId = dataDownload.title.replace(/#\w+/g, (match) => match.toLowerCase());
+        uniqueId = (dataDownload.title || dataDownload.url || "unknown").replace(/#\w+/g, (match) => match.toLowerCase());
         dataDownload.medias.forEach((item) => {
           if (item.quality.toLowerCase() === "no watermark") {
             dataLink.push({
@@ -282,52 +439,22 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
               title: dataDownload.title,
               thumbnail: item.thumbnail || dataDownload.thumbnail,
               extension: item.extension,
+              voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
             });
           }
         });
         break;
       case "youtube":
         uniqueId = extractYoutubeId(dataDownload.url);
-        const dataYoutube = [
-          {
-            url: dataDownload.url,
-            quality: "360p",
-            type: "video",
-            extension: "mp4",
-          },
-          {
-            url: dataDownload.url,
-            quality: "720p",
-            type: "video",
-            extension: "mp4",
-          },
-          {
-            url: dataDownload.url,
-            quality: "1080p",
-            type: "video",
-            extension: "mp4",
-          },
-          {
-            url: dataDownload.url,
-            quality: "max",
-            type: "video",
-            extension: "mp4",
-          },
-          {
-            url: dataDownload.url,
-            quality: "audio",
-            type: "audio",
-            extension: "mp3",
-          },
-        ];
-        dataYoutube.forEach((item) => {
+        dataDownload.medias.forEach((item) => {
           dataLink.push({
             url: item.url,
-            quality: item.quality,
+            quality: item.quality || item.label || "Unknown",
             type: item.type,
             title: dataDownload.title,
-            thumbnail: item.thumbnail || dataDownload.thumbnail,
-            extension: item.extension,
+            thumbnail: dataDownload.thumbnail,
+            extension: item.extension || item.ext || "mp4",
+            voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
           });
         });
         break;
@@ -342,27 +469,27 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
               title: dataDownload.title,
               thumbnail: item.thumbnail || dataDownload.thumbnail,
               extension: item.extension,
+              voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
             });
           }
         });
         break;
       case "threads":
-        uniqueId = dataDownload.author + dataDownload.title;
+        uniqueId = (dataDownload.author + dataDownload.title) || dataDownload.url || "unknown";
         dataDownload.medias.forEach((item) => {
-          if (item.type.toLowerCase() !== "image") {
-            dataLink.push({
-              url: item.url,
-              quality: item.quality,
-              type: item.type,
-              title: dataDownload.title,
-              thumbnail: item.thumbnail || item.url,
-              extension: item.extension,
-            });
-          }
+          dataLink.push({
+            url: item.url,
+            quality: item.quality,
+            type: item.type,
+            title: dataDownload.title,
+            thumbnail: item.thumbnail || item.url,
+            extension: item.extension,
+            voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
+          });
         });
         break;
       case "instagram":
-        uniqueId = dataDownload.url;
+        uniqueId = dataDownload.url || dataDownload.title || "unknown";
         dataDownload.medias.forEach((item) => {
           dataLink.push({
             url: item.url,
@@ -371,14 +498,24 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
             title: dataDownload.title,
             thumbnail: item.thumbnail || dataDownload.thumbnail,
             extension: item.extension,
+            voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
           });
         });
         break;
       case "spotify":
       case "telegram":
-      case "X":
       case "dailymotion":
-        uniqueId = dataDownload.url.split("/").pop();
+      case "likee":
+      case "sina":
+      case "ixigua":
+      case "vk-vkvideo":
+      case "oke":
+      case "deezer":
+      case "kuaishou":
+      case "qq":
+      case "bluesky":
+      case "pornbox":
+        uniqueId = (dataDownload.url && dataDownload.url.split("/").pop()) || dataDownload.title || "unknown";
         dataDownload.medias.forEach((item) => {
           dataLink.push({
             url: item.url,
@@ -387,15 +524,24 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
             title: dataDownload.title,
             thumbnail: item.thumbnail || dataDownload.thumbnail,
             extension: item.extension,
+            voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
           });
         });
         break;
       default:
-        const object = {
-          caption: `Link này em chưa hỗ trợ tải dữ liệu.`,
-        };
-        await sendMessageWarningRequest(api, message, object, 30000);
-        return;
+        uniqueId = (dataDownload.url && dataDownload.url.split("/").pop()) || dataDownload.title || "unknown";
+        dataDownload.medias.forEach((item) => {
+          dataLink.push({
+            url: item.url,
+            quality: item.quality,
+            type: item.type,
+            title: dataDownload.title,
+            thumbnail: item.thumbnail || dataDownload.thumbnail,
+            extension: item.extension,
+            voiceUrl: dataDownload.music?.url || dataDownload.voice?.url || null,
+          });
+        });
+        break;
     }
 
     if (dataLink.length === 0) {
@@ -406,9 +552,46 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
       return;
     }
 
-    if (dataLink.length === 1) {
+    const images = dataLink.filter(item => item.type.toLowerCase() === 'image');
+    const voices = dataLink.filter(item => item.type.toLowerCase() === 'audio');
+    const videos = dataLink.filter(item => item.type.toLowerCase() === 'video');
+    const others = dataLink.filter(item => !['image', 'audio', 'video'].includes(item.type.toLowerCase()));
+
+    if (images.length > 0) {
+      await processAndSendMultipleImages(api, message, images, {
+        mediaType,
+        uniqueId,
+        duration: dataDownload.duration,
+        title: dataDownload.title,
+        author: dataDownload.author,
+        senderId,
+        senderName
+      });
+    }
+
+    if (voices.length > 0) {
+      for (const voice of voices) {
+        await processAndSendMedia(api, message, {
+          selectedMedia: voice,
+          mediaType,
+          uniqueId,
+          duration: dataDownload.duration,
+          title: dataDownload.title,
+          author: dataDownload.author,
+          senderId,
+          senderName
+        }, true);
+      }
+    }
+
+    if (videos.length === 0 && others.length === 0) {
+      return;
+    }
+
+    const remainingItems = [...videos, ...others];
+    if (remainingItems.length === 1) {
       await processAndSendMedia(api, message, {
-        selectedMedia: dataLink[0],
+        selectedMedia: remainingItems[0],
         mediaType,
         uniqueId,
         duration: dataDownload.duration,
@@ -422,7 +605,7 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
 
     let listText = `Đây là danh sách các phiên bản có sẵn:\n`;
     listText += `Hãy trả lời tin nhắn này với số thứ tự phiên bản bạn muốn tải!\n\n`;
-    listText += dataLink
+    listText += remainingItems
       .map((item, index) => `${index + 1}. ${item.type} - ${item.quality || "Unknown"} (${item.extension})`)
       .join("\n");
 
@@ -434,7 +617,7 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
     const quotedMsgId = listMessage?.message?.msgId || listMessage?.attachment[0]?.msgId;
     downloadSelectionsMap.set(quotedMsgId.toString(), {
       userRequest: senderId,
-      collection: dataLink,
+      collection: remainingItems,
       uniqueId: uniqueId,
       mediaType: mediaType,
       title: dataDownload.title,
@@ -444,7 +627,7 @@ export async function handleDownloadCommand(api, message, aliasCommand) {
     });
     setSelectionsMapData(senderId, {
       quotedMsgId: quotedMsgId.toString(),
-      collection: dataLink,
+      collection: remainingItems,
       uniqueId: uniqueId,
       mediaType: mediaType,
       title: dataDownload.title,
@@ -551,7 +734,6 @@ export async function handleDownloadReply(api, message) {
       },
     };
     await api.deleteMessage(msgDel, false);
-    // await api.undoMessage(message);
     downloadSelectionsMap.delete(quotedMsgId);
 
     await processAndSendMedia(api, message, {
@@ -574,4 +756,70 @@ export async function handleDownloadReply(api, message) {
     await sendMessageWarningRequest(api, message, object, 30000);
     return true;
   }
+}
+
+async function downloadVoiceWithTimeout(url, filepath, timeout = 30000) {
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error('Download timeout'));
+    }, timeout);
+
+    const response = axios({
+      url,
+      method: "GET",
+      responseType: "stream",
+      timeout: timeout,
+    });
+
+    response.then(res => {
+      const writer = fs.createWriteStream(filepath);
+      res.data.pipe(writer);
+      
+      writer.on("finish", () => {
+        clearTimeout(timeoutId);
+        resolve(filepath);
+      });
+      
+      writer.on("error", (error) => {
+        clearTimeout(timeoutId);
+        reject(error);
+      });
+    }).catch(error => {
+      clearTimeout(timeoutId);
+      reject(error);
+    });
+  });
+}
+
+async function downloadImageWithTimeout(url, filepath, timeout = 30000) {
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error('Download timeout'));
+    }, timeout);
+
+    const response = axios({
+      url,
+      method: "GET",
+      responseType: "stream",
+      timeout: timeout,
+    });
+
+    response.then(res => {
+      const writer = fs.createWriteStream(filepath);
+      res.data.pipe(writer);
+      
+      writer.on("finish", () => {
+        clearTimeout(timeoutId);
+        resolve(filepath);
+      });
+      
+      writer.on("error", (error) => {
+        clearTimeout(timeoutId);
+        reject(error);
+      });
+    }).catch(error => {
+      clearTimeout(timeoutId);
+      reject(error);
+    });
+  });
 }
