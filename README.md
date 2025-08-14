@@ -22,12 +22,18 @@ Mod lại bởi **NQD** – [GitHub](https://github.com/NQD136)
 ## 📌 Tính năng (v1.5.5)
 
 ### 🛠 Quản lý nhóm Zalo tự động
-- Hơn **50 lệnh quản lý** nhóm.
-- Tự động chống:
-  - 🛑 Spam
-  - 🔗 Liên kết
-  - ❌ Từ ngữ xấu
-  - 😡 Nội dung tiêu cực
+- Tự động bảo vệ nhóm
+  - **Chống Spam**
+  - **Chặn Liên kết**
+  - **Lọc Từ Ngữ Xấu**
+  - **Chặn Nội Dung Tiêu Cực**
+  - **Chống Gửi Ảnh Nhạy Cảm**
+  - **Chống Thu Hồi Tin Nhắn**
+  - **Chỉ Được Phép Gửi Tin Nhắn Văn Bản**
+  - **Kick Thành Viên**
+  - **Chặn Thành Viên**
+  - **Tự Động Duyệt Thành Viên**
+  - **Tin Nhắn Tag All**
 
 ### 🎯 Social Bot
 - Hơn **50 lệnh** giải trí:
@@ -36,6 +42,12 @@ Mod lại bởi **NQD** – [GitHub](https://github.com/NQD136)
   - 🎶 ZingMP3, NhacCuaTui
   - ...và nhiều hơn nữa.
 
+###🎮 Tiện ích game
+- **Tài xỉu**
+- **Chẵn lẻ**
+- **Bầu cua**
+- **Kéo búa bao**
+- **Nông trại**
 ---
 
 ## 🚀 Hướng dẫn sử dụng
