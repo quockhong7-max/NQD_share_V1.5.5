@@ -204,7 +204,7 @@ DB_NAME=nqd_db
   "user": "root",
   "password": "123",
   "database": "bot-zalo-dqt",
-  "port": 3306,
+  "port": 3300,
   "tablePlayerZalo": "players_zalo",
   "tableAccount": "account",
   "dailyReward": 100000000000
