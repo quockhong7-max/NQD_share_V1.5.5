@@ -196,6 +196,7 @@ DB_NAME=nqd_db
 ```
 
 **LƯU Ý**: Nếu DB_PASSWORD có đặt thì cần vô file **database-config.json** ở **nano /root/NQD_share_V1.5.5/assets/json-data/database-config.json**
+
 **Sẽ thấy**
 ```
 {
