@@ -89,7 +89,7 @@ assets/data/list_admin.json
 Sau khi cấu hình, hãy **khởi động lại** bot để áp dụng thay đổi.
 
 ---
-
+---
 
 
 ## Hướng dẫn khởi chạy trên termux(Android)
@@ -210,7 +210,7 @@ DB_NAME=nqd_db
   "dailyReward": 100000000000
 }
 ```
-**"password": "123"** dòng này mk phải để đúng với DB_PASSWORD, nếu không sẽ kông sử dụng được các tác vụ game
+**"password": "123"** dòng này mk phải để đúng với **DB_PASSWORD**, nếu không sẽ kông sử dụng được các tác vụ game
 
 **B8: build lại node_modules**
 ```
