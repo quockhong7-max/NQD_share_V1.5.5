@@ -221,7 +221,8 @@ rm -rf node_modules package-lock.json && npm i
 ## ❤️ Lời cảm ơn
 
 **N Q D** chúc bạn sử dụng bot vui vẻ
-Cảm ơn bạn đã sử dụng mã nguồn của chúng tôi.  
+
+Cảm ơn bạn đã sử dụng mã nguồn của tôi.  
 Hy vọng bạn sẽ thích những tính năng mà **Zalo ChatBot** mang lại!
 **Tham gia group của tôi**[tại đây](https://zalo.me/g/ffqiqj984)
 **Liên hệ với N Q D**[tại đây](https://zaloapp.com/qr/p/gocjf95sb529?src=qr)
