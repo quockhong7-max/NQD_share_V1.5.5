@@ -164,6 +164,12 @@ apt install mariadb-server mariadb-client -y
 ```
 service mariadb start
 ```
+
+**Đặt mật khẩu cho sql**
+```
+mysql -u root -p
+```
+
 *Đặt mật khẩu và enter*
 
 **B6: thêm sql vào bashrc**
@@ -177,7 +183,7 @@ if ! pgrep -x mysqld > /dev/null; then
     service mariadb start
 fi
 ```
-**vào cuối file và thoát rồi chạy**
+**dán vào cuối file và thoát rồi chạy**
 ```
 source ~/.bashrc
 ```
@@ -186,16 +192,7 @@ source ~/.bashrc
 ```
 nano .env
 ```
-**Dán**
-```
-DB_HOST=127.0.0.1
-DB_PORT=3300
-DB_USER=root
-DB_PASSWORD=123
-DB_NAME=nqd_db
-```
-
-**LƯU Ý**: Nếu DB_PASSWORD có đặt thì cần vô file **database-config.json** ở **nano /root/NQD_share_V1.5.5/assets/json-data/database-config.json**
+*Truy cập vô* **nano /root/NQD_share_V1.5.5/assets/json-data/database-config.json**
 
 **Sẽ thấy**
 ```
@@ -203,7 +200,7 @@ DB_NAME=nqd_db
   "nameServer": "N Q D",
   "host": "localhost",
   "user": "root",
-  "password": "123",
+  "password": "",
   "database": "bot-zalo-dqt",
   "port": 3300,
   "tablePlayerZalo": "players_zalo",
@@ -211,7 +208,22 @@ DB_NAME=nqd_db
   "dailyReward": 100000000000
 }
 ```
-**"password": "123"** dòng này mk phải để đúng với **DB_PASSWORD**, nếu không sẽ kông sử dụng được các tác vụ game
+**Nhập mật khẩu ở dòng "password": "", nhập mật khẩu nãy tạo ở trên, xong rồi thì thoát ra**
+
+**Truy cập vô**
+```
+nano .evn
+```
+
+**Dán**
+```
+DB_HOST=127.0.0.1
+DB_PORT=3300
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=nqd_db
+```
+**"password": ""** dòng này mk phải để đúng với **DB_PASSWORD**, nếu không sẽ kông sử dụng được các tác vụ game
 
 **B8: build lại node_modules**
 ```
