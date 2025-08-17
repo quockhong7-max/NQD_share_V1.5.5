@@ -96,6 +96,7 @@ Sau khi cấu hình, hãy **khởi động lại** bot để áp dụng thay đ�
 **Lưu ý**: Khi chạy trên termux cần thay lại code file **bot.js**, lấy file code đã sửa [tại đây](https://www.mediafire.com/file/aadre72xnkd1r76/bot.js/file)
 
 **Video cách cài chi tiết [Tại Đây](https://youtu.be/PcLnqET1Ivs?si=7yT8UGuu5VkXUrLc)**
+
 **B1: tải root debian**
 ```
 pkg update && pkg upgrade -y
