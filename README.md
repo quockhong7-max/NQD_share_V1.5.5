@@ -169,8 +169,20 @@ service mariadb start
 ```
 mysql -u root -p
 ```
+**Bạn sẽ thấy enter password, nhập**
+*bước này chưa cần làm gì,ấn enter*
 
-*Đặt mật khẩu và enter*
+**Sau đó sẽ thấy dòng có chữ none**
+*copy lệnh này*
+```
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'nhap_matkhau_moi';
+FLUSH PRIVILEGES;
+```
+**Xong gõ**
+```
+EXIT
+```
+*để thoát*
 
 **B6: thêm sql vào bashrc**
 ```
@@ -178,6 +190,7 @@ nano ~/.bashrc
 
 ```
 **thêm Auto start MariaDB khi vào Debian**
+*kéo xuống dòng cuối thêm*
 ```
 if ! pgrep -x mysqld > /dev/null; then
     service mariadb start
@@ -188,11 +201,11 @@ fi
 source ~/.bashrc
 ```
 
-**B7 tạo .env**
+**B7: chỉnh sửa database và tạo .env**
+*Truy cập vô* 
 ```
-nano .env
+nano /root/NQD_share_V1.5.5/assets/json-data/database-config.json
 ```
-*Truy cập vô* **nano /root/NQD_share_V1.5.5/assets/json-data/database-config.json**
 
 **Sẽ thấy**
 ```
@@ -212,7 +225,7 @@ nano .env
 
 **Truy cập vô**
 ```
-nano .evn
+nano .env
 ```
 
 **Dán**
@@ -223,13 +236,24 @@ DB_USER=root
 DB_PASSWORD=
 DB_NAME=nqd_db
 ```
-**"password": ""** dòng này mk phải để đúng với **DB_PASSWORD**, nếu không sẽ kông sử dụng được các tác vụ game
+**"password": ""** dòng này mk phải để đúng với **DB_PASSWORD**, nếu không sẽ không sử dụng được các tác vụ game**
 
-**B8: build lại node_modules**
+**B8: Chỉnh sửa file**
+*chạy lệnh*
+```
+nano /root/NQD_share_V1.5.5/node_modules/nsfwjs/dist/esm/index.js
+```
+*kéo xuống tìm dòng chứa buffer/ và sửa thành buffer/index.js, xong hãy thoát ra*
+
+**B9: build lại node_modules**
 ```
 rm -rf node_modules package-lock.json && npm i
 ```
 
+**Phần còn lại**
+```
+node bot.js
+```
 ## ❤️ Lời cảm ơn
 
 **N Q D** chúc bạn sử dụng bot vui vẻ
