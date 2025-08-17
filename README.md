@@ -25,7 +25,6 @@ Mod lại bởi **NQD** – [GitHub](https://github.com/NQD136)
 - Tự động bảo vệ nhóm
   - **Chống Spam**
   - **Chặn Liên kết**
-  - **Lọc Từ Ngữ Xấu**
   - **Chặn Nội Dung Tiêu Cực**
   - **Chống Gửi Ảnh Nhạy Cảm**
   - **Chống Thu Hồi Tin Nhắn**
