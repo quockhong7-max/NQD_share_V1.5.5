@@ -237,7 +237,7 @@ DB_USER=root
 DB_PASSWORD=
 DB_NAME=nqd_db
 ```
-**"password": ""** dòng này mk phải để đúng với **DB_PASSWORD**, nếu không sẽ không sử dụng được các tác vụ game**
+**"password": ""** dòng này mk phải để đúng với **DB_PASSWORD**, *nếu không sẽ không sử dụng được các tác vụ game*
 
 **B8: Chỉnh sửa file**
 *chạy lệnh*
