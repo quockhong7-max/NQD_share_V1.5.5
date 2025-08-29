@@ -1,7 +1,7 @@
 # 🤖 Zalo ChatBot
 
-**Zalo ChatBot** được phát triển bằng **JavaScript** với thư viện **zlbotdqt**.  
-Tác giả: **SBT** – [GitHub](https://github.com/itisme)
+**Zalo ChatBot** được phát triển bằng **JavaScript** 
+Tác giả: **NDQ**
 Mod lại bởi **NQD** – [GitHub](https://github.com/NQD136)
 
 ```
