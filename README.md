@@ -239,17 +239,17 @@ DB_NAME=nqd_db
 ```
 **"password": ""** dòng này mk phải để đúng với **DB_PASSWORD**, *nếu không sẽ không sử dụng được các tác vụ game*
 
-**B8: Chỉnh sửa file**
-*chạy lệnh*
+**B8: build lại node_modules**
 ```
 rm -rf node_modules package-lock.json && npm i
 ```
-*kéo xuống tìm dòng chứa buffer/ và sửa thành buffer/index.js, xong hãy thoát ra*
 
-**B9: build lại node_modules**
+**B9: Chỉnh sửa file**
+*chạy lệnh*
 ```
 nano /root/NQD_share_V1.5.5/node_modules/nsfwjs/dist/esm/index.js
 ```
+*kéo xuống tìm dòng chứa buffer/ và sửa thành buffer/index.js, xong hãy thoát ra*
 
 **Phần còn lại**
 ```
