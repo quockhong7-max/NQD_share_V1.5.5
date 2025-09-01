@@ -2,7 +2,7 @@
 
 **Zalo ChatBot** được phát triển bằng **JavaScript** 
 Tác giả: **NDQ**
-Mod lại bởi **NQD** – [GitHub](https://github.com/NQD136)
+Mod lại bởi **Nqduan** – [GitHub](https://github.com/NQD136)
 
 ```
                   .----.
@@ -242,13 +242,13 @@ DB_NAME=nqd_db
 **B8: Chỉnh sửa file**
 *chạy lệnh*
 ```
-nano /root/NQD_share_V1.5.5/node_modules/nsfwjs/dist/esm/index.js
+rm -rf node_modules package-lock.json && npm i
 ```
 *kéo xuống tìm dòng chứa buffer/ và sửa thành buffer/index.js, xong hãy thoát ra*
 
 **B9: build lại node_modules**
 ```
-rm -rf node_modules package-lock.json && npm i
+nano /root/NQD_share_V1.5.5/node_modules/nsfwjs/dist/esm/index.js
 ```
 
 **Phần còn lại**
@@ -257,11 +257,11 @@ node bot.js
 ```
 ## ❤️ Lời cảm ơn
 
-**N Q D** chúc bạn sử dụng bot vui vẻ
+**Nqduan** chúc bạn sử dụng bot vui vẻ
 
 Cảm ơn bạn đã sử dụng mã nguồn của tôi.  
 Hy vọng bạn sẽ thích những tính năng mà **Zalo ChatBot** mang lại!
 
 **Tham gia group của tôi** [tại đây](https://zalo.me/g/ffqiqj984)
 
-**Liên hệ với N Q D** [tại đây](https://zaloapp.com/qr/p/gocjf95sb529?src=qr)
+**Liên hệ với Nqduan** [tại đây](https://zaloapp.com/qr/p/gocjf95sb529?src=qr)
