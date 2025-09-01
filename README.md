@@ -245,6 +245,7 @@ rm -rf node_modules package-lock.json && npm i
 ```
 
 **B9: Chỉnh sửa file**
+
 *chạy lệnh*
 ```
 nano /root/NQD_share_V1.5.5/node_modules/nsfwjs/dist/esm/index.js
